@@ -21,10 +21,10 @@ const Wrapper = styled.div`
 `;
 
 const FormWrapper = styled.div`
-  width:550px;
-  height: 586px;
+  width:55rem;
+  height: 58.6rem;
   background: #EEF0F2;
-  border-radius: 20px;
-  padding: 50px 50px;
-  margin: 5%;
+  border-radius: 2rem;
+  padding: 5rem 5rem;
+  margin: 4rem 0;
 `;
