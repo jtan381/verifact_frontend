@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import QuestionForm from "../components/QuestionForm"
 
-export default function AskQuestionPage() {
-  const createHistory = require("history").createBrowserHistory;
+export default function AskQuestion() {
   const [articleLink, setArticleLink] = useState("");
   const [statement, setStatement] = useState("");
 
   return <Wrapper>
     <FormWrapper>
-      <QuestionForm createHistory={createHistory} articleLink={articleLink}
-        setArticleLink={setArticleLink} statement={statement} setStatement={setStatement} />
+      <QuestionForm articleLink={articleLink} setArticleLink={setArticleLink} statement={statement} setStatement={setStatement} />
     </FormWrapper>
   </Wrapper>
 
