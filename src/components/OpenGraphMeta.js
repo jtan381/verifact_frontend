@@ -1,45 +1,57 @@
-import React from "react";
-import { Image } from "react-bootstrap";
-import { FiExternalLink } from "react-icons/fi";
-import styled from "styled-components";
+import React from 'react'
+import { Image } from 'react-bootstrap'
+import { FiArrowUpRight } from 'react-icons/fi'
+import styled from 'styled-components'
+import url from 'url'
 
-export default function OpenGraphMeta(props) {
-  const { media_url, media_title, media_image } = props;
+const Wrap = styled.div`
+  display: grid;
+  grid-template-columns: 10rem auto;
+  margin-bottom: 2rem;
+`
+
+const Content = styled.div`
+  padding-left: 1rem;
+`
+
+const MediaImage = styled(Image)`
+  width: 10rem;
+  height: 5.625rem;
+  border: none;
+`
+
+const MediaLink = styled.a`
+  margin-left: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1rem;
+  color: #30323D;
+
+  &:hover{
+    color: #30323D;
+    text-decoration: none;
+  }
+`
+
+export default function OpenGraphMeta ({ mediaUrl, mediaTitle, mediaImage }) {
+  const mediaHostname = url.parse(mediaUrl).hostname
+
   return (
-    <Wrapper>
-      <div>
-        <Image src={media_image} thumbnail />
-      </div>
-      <ContentWrapper style={{ paddingLeft: "10px" }}>
-        <ExternalLinkWrapper>
-          <FiExternalLink />
-          <a onClick={event => { event.stopPropagation(); }} href={media_url} >{media_url}</a>
-        </ExternalLinkWrapper>
-        <div style={{ overflow: "auto" }}>
-          {media_title.length > 108 ? (
-            <>{media_title.slice(0, 130)}...</>
-          ) : (
-              <>{media_title}</>
-            )}
+    <Wrap>
+      <MediaImage src={mediaImage} thumbnail />
+
+      <Content>
+        <div>
+          <FiArrowUpRight />
+          <MediaLink
+            href={mediaUrl}
+            onClick={e => { e.stopPropagation() }}
+            children={mediaHostname}
+          />
         </div>
-      </ContentWrapper>
-    </Wrapper>
-  );
+        {mediaTitle}
+      </Content>
+    </Wrap>
+  )
 }
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 150px auto;
-`;
-
-const ContentWrapper = styled.div`
-  display: grid;
-  grid-template-rows: auto auto;
-`;
-
-const ExternalLinkWrapper = styled.div`
-  display: grid;
-  overflow: auto;
-  grid-template-columns: 20px auto;
-  align-items: center;
-`;
